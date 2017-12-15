@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+    background-color: grey;
+    margin-top: 15px;
+    font-size: 20px;
+}
+h1 {
+  margin-bottom: 0px;
+}
+img {
+  height: 400px;
+  margin-top: 15px;
+}
+input, textarea, button {
+  font-size: 20px;
+}
+p {
+  margin: 5px;
+}
+button {
+  margin-top: 5px;
+}

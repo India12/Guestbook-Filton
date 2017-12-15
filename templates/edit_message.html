@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block title %}Edit Filton message{% endblock title %}
+
+{% block page_content %}
+
+  <h1>Edit message:</h1>
+
+  <form method="post">
+    <textarea name="text" rows="8" cols="80">{{ ind_message.text }}</textarea>
+    <button type="submit">OK</button>
+  </form>
+
+{% endblock page_content %}
+
+<!--<form method="post" action="/message/{{ ind_message.key.id() }}/edit"-->

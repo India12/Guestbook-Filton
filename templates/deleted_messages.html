@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block title %}Deleted messages{% endblock title %}
+
+{% block page_content %}
+<h3>Deleted messages</h3>
+
+{% for deleted_message in deleted_messages %}
+    <p>
+        <strong>{{ deleted_message.name + " " + deleted_message.surname }}</a></strong> at {{ deleted_message.dateTime.strftime('%d-%m-%Y, %H:%M') }}:
+        <em>Text: {{ deleted_message.text }}</em><br />
+        <a href="/message/{{ deleted_message.key.id() }}/restore">Restore</a>,
+        <a href="/message/{{ deleted_message.key.id() }}/compl_deleted_message">Permanently delete</a>
+        <br />
+    </p>
+    <br>
+{% else %}
+    <p>No deleted messages yet.</p>
+{% endfor %}
+{% endblock page_content %}

@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block title %}Permanently delete messages{% endblock title %}
+
+{% block page_content %}
+
+<h1>Are you sure you want to permanently delete this message?</h1>
+
+<form method="post">
+  <h1>Message data:</h1>
+  <p>Author: {{ compl_deleted_message.name + " " + compl_deleted_message.surname}}</p>
+  <p>Author email: {{ compl_deleted_message.email }}</p>
+  <p>ID: {{ compl_deleted_message.key.id() }}</p>
+  <p>Message date: {{ compl_deleted_message.dateTime.strftime('%d-%m-%Y, %H:%M') }}</p>
+  <p>Message text: {{ compl_deleted_message.text }}</p>
+
+  <button type="submit">Yes</button>
+</form>
+<a href="/deleted"><button type="submit">No</button></a>
+{% endblock page_content %}

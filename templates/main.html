@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %} | Guestbook Filton exercise</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <h1>Filton resort</h1> <br />
+
+  {% if user %}
+    <strong>Hi there: {{ user.email() }}</strong>
+    | <a href="{{ logout_url }}">Logout</a>
+  {% else %}
+    <a href="{{ login_url }}">Login</a>
+  {% endif %}<br />
+
+  <a href="/">Home</a> | <a href="/leave_a_review">Leave a review</a> | <a href="/deleted">Deleted messages</a><br/>
+
+  {% block page_content %}
+    <img src="/assets/images/filtonResort.jpg" alt="Filton resort">
+    <h1>Welcome to Filton resort!</h1>
+    <br />
+    <br />
+    <p>Guest reviews:</p>
+
+  {% for msg in msg_list %}
+    <p><a href="/message/{{ msg.key.id() }}">{{ msg.name }} {{ msg.surname }} {{msg.dateTime.strftime('%d-%m-%Y %H:%M') }} <br /> {{ msg.text }} </a></p><br />
+
+  {% else %}
+    <p>No reviews yet.</p>
+
+  {% endfor %}
+  {% endblock page_content %}
+
+</body>
+</html>

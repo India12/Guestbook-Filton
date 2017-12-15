@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block title %}Restore message{% endblock title %}
+
+{% block page_content %}
+
+<h1>Are you sure you want to restore this message?</h1>
+
+<form method="post">
+  <h1>Message data:</h1>
+  <p>Author: {{ ind_message_restore.name + " " + ind_message_restore.surname}}</p>
+  <p>Author email: {{ ind_message_restore.email }}</p>
+  <p>ID: {{ ind_message_restore.key.id() }}</p>
+  <p>Message date: {{ ind_message_restore.dateTime.strftime('%d-%m-%Y, %H:%M') }}</p>
+  <p>Message text: {{ ind_message_restore.text }}</p>
+
+  <button type="submit">Yes</button>
+</form>
+<a href="/deleted"><button type="submit">No</button></a>
+{% endblock page_content %}

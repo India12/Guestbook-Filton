@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block title %}Individual Filton message{% endblock title %}
+
+{% block page_content %}
+
+  <h1>Message data:</h1>
+  <p>Message ID: {{ ind_message.key.id() }}</p>
+  <p>Message date: {{ ind_message.dateTime.strftime('%d-%m-%Y, %H:%M') }}</p>
+  <p>Message email: {{ ind_message.email }}</p>
+  <p>Message text: {{ ind_message.text }}</p>
+
+  <a href="/message/{{ ind_message.key.id() }}/edit">Edit</a>
+  <a href="/message/{{ ind_message.key.id() }}/delete">Delete</a>
+
+{% endblock page_content %}

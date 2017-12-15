@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block title %}Guestbook{% endblock title %}
+
+{% block page_content %}
+
+  <form method="post">
+    <p>Name: </p><input name="name"><br />
+    <p>Surname: </p><input name="surname"><br />
+    <p>Email: </p><input name="email"><br />
+    <p>Leave a message:</p>
+    <textarea name="text" rows="6" cols="60"></textarea><br />
+    <button type="submit">Send</button>
+  </form>
+
+{% endblock page_content %}
+
+<!--<form  method="post" action="/leave_a_review"-->
