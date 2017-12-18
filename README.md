@@ -1,6 +1,7 @@
 # About
 
-Basic GAE project with Jinja templating engine
+Basic GAE project with Jinja templating engine. 
+Guestbook reviews application.
 
 # Usage
 
