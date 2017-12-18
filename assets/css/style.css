@@ -1,15 +1,13 @@
 body {
-    text-align: center;
-    background-color: grey;
-    margin-top: 15px;
-    font-size: 20px;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 20px;
 }
 h1 {
   margin-bottom: 0px;
 }
 img {
   height: 400px;
-  margin-top: 15px;
 }
 input, textarea, button {
   font-size: 20px;
@@ -19,4 +17,17 @@ p {
 }
 button {
   margin-top: 5px;
+}
+.page-content {
+  margin-top: 70px;
+}
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+.navbar-right {
+  padding-right: 30px;
+}
+.msg-details {
+  display: inline-block;
 }

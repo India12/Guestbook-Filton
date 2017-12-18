@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 
-{% block title %}Individual Filton message{% endblock title %}
+{% block title %}Individual Filton message{% endblock %}
 
 {% block page_content %}
 
@@ -10,7 +10,8 @@
   <p>Message email: {{ ind_message.email }}</p>
   <p>Message text: {{ ind_message.text }}</p>
 
+{% if is_admin or ind_message.email == email %} <!-- optional, because a non user/author or non admin is not allowed to enter individual_message.html anyway -->
   <a href="/message/{{ ind_message.key.id() }}/edit">Edit</a>
   <a href="/message/{{ ind_message.key.id() }}/delete">Delete</a>
-
-{% endblock page_content %}
+{% endif %}
+{% endblock %}

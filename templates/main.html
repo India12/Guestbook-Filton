@@ -1,38 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock title %} | Guestbook Filton exercise</title>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %} | Guestbook Filton exercise</title>
 
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-  <h1>Filton resort</h1> <br />
+  <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <h1><a class="navbar-brand" href="/">Filton Resort</a></h1>
 
-  {% if user %}
-    <strong>Hi there: {{ user.email() }}</strong>
-    | <a href="{{ logout_url }}">Logout</a>
-  {% else %}
-    <a href="{{ login_url }}">Login</a>
-  {% endif %}<br />
+        <ul class="nav navbar-nav navbar-right">
 
-  <a href="/">Home</a> | <a href="/leave_a_review">Leave a review</a> | <a href="/deleted">Deleted messages</a><br/>
+          <li><a href="/">Home</a></li>
+          <li><a href="/leave_a_review">Leave a review</a></li>
+          {% if is_admin %}
+          <li><a href="/deleted">Deleted messages</a></li>
+          {% endif %}
 
-  {% block page_content %}
-    <img src="/assets/images/filtonResort.jpg" alt="Filton resort">
-    <h1>Welcome to Filton resort!</h1>
-    <br />
-    <br />
-    <p>Guest reviews:</p>
+          {% if user %}
+            <li><a class="disabled logout">Hi there: {{ user.email() }}</a></li><li><a href="{{ logout_url }}" class="logout">Log out</a></li>
+          {% else %}
+            <li><a class="disabled login">Hi there: Anonymous! Please: </a></li><li><a href="{{ login_url }}" class="login">Log in</a></li>
+          {% endif %}
 
-  {% for msg in msg_list %}
-    <p><a href="/message/{{ msg.key.id() }}">{{ msg.name }} {{ msg.surname }} {{msg.dateTime.strftime('%d-%m-%Y %H:%M') }} <br /> {{ msg.text }} </a></p><br />
+        </ul>
+      </nav>
 
-  {% else %}
-    <p>No reviews yet.</p>
+      <div class="page-content">
 
-  {% endfor %}
-  {% endblock page_content %}
+        {% block page_content %}
 
+          <br />
+          <img src="/assets/images/filtonResort.jpg" alt="Filton resort" >
+          <h1>Welcome to Filton resort!</h1>
+          <br />
+          <br />
+
+          <div class="container">
+            <h1 class="text-center">Guest reviews:</h1><hr>
+
+            {% for msg in msg_list %}
+            <div class="bg-secondary text-white">
+              <h5 >{{msg.dateTime.strftime('%d-%m-%Y %H:%M') }}</h5>
+              <h4>{{ msg.name }} {{ msg.surname }}: {{ msg.text }}
+              {% if is_admin or email == msg.email %}                                 <!--je tu mozno, da se namesto email s strani tretje osebe vpise email in tako zlorabi dostop?-->
+                <a href ="/message/{{ msg.key.id() }}">Manage details</a></h4>
+              {% endif %}
+
+              <hr>
+            </div>
+            {% else %}
+            <p>No reviews yet.</p>
+
+            {% endfor %}
+          {% endblock %}
+        </div>
+      </div>
+  </div>
 </body>
 </html>

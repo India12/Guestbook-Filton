@@ -33,6 +33,10 @@ class BaseHandler(webapp2.RequestHandler):
             logged_in = True
             logout_url = users.create_logout_url('/')
             params["logout_url"] = logout_url
+            params["email"] = user.email()
+            if user.email() == "admin@admin.com":
+                params["is_admin"] = True
+
         else:
             logged_in = False
             login_url = users.create_login_url('/')
@@ -75,13 +79,18 @@ class SendMessageHandler(BaseHandler):
 class IndividualMessageHandler(BaseHandler):
     def get(self, message_id):
         user = users.get_current_user()
+        ind_message = Message.get_by_id(int(message_id))
 
-        if user and Message.email == user.email() or user.email() == "admin@admin.com":      # sporocilo
+
+        '''Another way of access control:'''
+        if not user:
+            return self.write("You are not logged in!")
+        elif user.email() == ind_message.email or user.email() == "admin@admin.com":
             ind_message = Message.get_by_id(int(message_id))
             params = {"ind_message": ind_message}
             return self.render_template("individual_message.html", params=params)
         else:
-            return self.write("You are not an admin!")
+            return self.write("You are not an authorized to see this!")
 
 class EditMessageHandler(BaseHandler):
     def get(self, message_id):
@@ -91,10 +100,13 @@ class EditMessageHandler(BaseHandler):
         return self.render_template("edit_message.html", params=params)
 
     def post(self, message_id):
+        user = users.get_current_user()
         ind_message = Message.get_by_id(int(message_id))
-        text = self.request.get("text")
-        ind_message.text = text
-        ind_message.put()
+
+        if user.email() == ind_message.email or user.email() == "admin@admin.com":
+            text = self.request.get("text")
+            ind_message.text = text
+            ind_message.put()
 
         params = {"ind_message": ind_message}
 
