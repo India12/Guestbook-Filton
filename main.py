@@ -34,7 +34,7 @@ class BaseHandler(webapp2.RequestHandler):
             logout_url = users.create_logout_url('/')
             params["logout_url"] = logout_url
             params["email"] = user.email()
-            if user.email() == "admin@admin.com":
+            if user.email() == "turnsek.lucija@gmail.com":
                 params["is_admin"] = True
 
         else:
@@ -82,10 +82,11 @@ class IndividualMessageHandler(BaseHandler):
         ind_message = Message.get_by_id(int(message_id))
 
 
-        '''Another way of access control:'''
+        #Another way of access control: (some parts are optional: first and last part)
         if not user:
             return self.write("You are not logged in!")
-        elif user.email() == ind_message.email or user.email() == "admin@admin.com":
+        #elif Message.email == user.email() or user.email() == "turnsek.lucija@gmail.com":      #isti ucinek?
+        elif user.email() == ind_message.email or user.email() == "turnsek.lucija@gmail.com":
             ind_message = Message.get_by_id(int(message_id))
             params = {"ind_message": ind_message}
             return self.render_template("individual_message.html", params=params)
@@ -103,7 +104,7 @@ class EditMessageHandler(BaseHandler):
         user = users.get_current_user()
         ind_message = Message.get_by_id(int(message_id))
 
-        if user.email() == ind_message.email or user.email() == "admin@admin.com":
+        if user.email() == ind_message.email or user.email() == "turnsek.lucija@gmail.com":
             text = self.request.get("text")
             ind_message.text = text
             ind_message.put()

@@ -10,6 +10,8 @@
 
     {% if logged_in == False %}
       <p>Email: </p><input name="email"><br />
+    {% elif logged_in == True %}
+      <p>Email: </p><input name="email" value="{{ user.email() }}"><br />
     {% endif %}
 
     <p>Leave a message:</p>
@@ -19,4 +21,4 @@
 
 {% endblock %}
 
-<!--<form  method="post" action="/leave_a_review"-->
+<!--<form  method="post" action="/leave_a_review">-->
